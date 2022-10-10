@@ -1,0 +1,58 @@
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+}
+.card-header{
+    background-color:rgb(25, 81, 235) ;
+    text-align: center;
+    color: white;
+}
+.body1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.body2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.option{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    border: 2px solid rgb(25, 81, 235);
+    width: 40%;
+
+}
+.option:hover{
+    box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+
+}
+.no{
+    background-color:rgb(25, 81, 235) ;
+    width: 20%;
+    padding: 10px;
+    color: white;
+}
+.answer{
+    background-color: white;
+    width: 80%;
+    padding: 10px;
+    font-weight: 0;
+}
+.next{
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.next:hover{
+    transform: scale(1.2);
+    
+}
