@@ -141,7 +141,8 @@ export default function QuizTemplate() {
       <div style={{
         display:"flex",
         alignItems:"center"
-      }}><FormControlLabel value="op1" control={<Radio />} label="A" /><TextField  label="Option 1" variant="standard" /></div><br/>
+      }}><FormControlLabel value="op1" control={<Radio />} label="A" /><TextField  label="Option 1" variant="standard" /><br/>
+      </div>
 
       <div style={{
         display:"flex",
@@ -150,8 +151,20 @@ export default function QuizTemplate() {
         <FormControlLabel value="op2" control={<Radio />} label="B" /><TextField id="standard-basic" label="Option 2" variant="standard" /><br/>
       </div>
       
-      <FormControlLabel value="op3" control={<Radio />} label="C" /><TextField id="standard-basic" label="Option 3" variant="standard" /><br/>
-      <FormControlLabel value="op4" control={<Radio />} label="D" /><TextField id="standard-basic" label="Option 4" variant="standard" /><br/>
+      <div style={{
+        display:"flex",
+        alignItems:"center"
+      }}>
+        <FormControlLabel value="op3" control={<Radio />} label="C" /><TextField id="standard-basic" label="Option 3" variant="standard" /><br/>
+      </div>
+
+      <div style={{
+        display:"flex",
+        alignItems:"center"
+      }}>
+        <FormControlLabel value="op4" control={<Radio />} label="D" /><TextField id="standard-basic" label="Option 4" variant="standard" /><br/>
+      </div>
+
       </RadioGroup>
       </FormControl>
     </Box>
