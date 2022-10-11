@@ -19,7 +19,7 @@ export default function AdminPage({auth1,admin}) {
     }}
     >
         <button style={{margin:'10px'}} className='btn btn-primary' onClick={()=>navigate('/quiz-add')}>Add Quiz</button>
-        <QuizCard isadmin={admin}></QuizCard>
+        <QuizCard isadmin={admin} user={{admin:"true"}}></QuizCard>
     </div>
 
   )

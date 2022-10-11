@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 
-export default function QuizCard({ isadmin,name,tag,id,user}) {
+export default function QuizCard({ isadmin,name,tag,id,user,score,q}) {
   let navigate = useNavigate();
   const theme = useTheme();
   const [show, setShow] = useState(false);
@@ -29,7 +29,6 @@ export default function QuizCard({ isadmin,name,tag,id,user}) {
           alignItems: "center",
           justifyContent: "space-between",
           width: "100%",
-          backgroundColor:user.completed?"green":""
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -52,7 +51,9 @@ export default function QuizCard({ isadmin,name,tag,id,user}) {
                 <Modal.Title>Top 3</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                Woohoo, you're reading this text in a modal!
+                1:Ravi<br/>
+                2:Jj<br/>
+                3:Hh<br/>
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
@@ -65,10 +66,11 @@ export default function QuizCard({ isadmin,name,tag,id,user}) {
                 <Modal.Title>Quiz Information</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                Woohoo, you're reading this text in a modal!
+                10 minutes time <br/>
+                please complete it on time!
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={()=>navigate(`/quiz/${id}`)}>
+                <Button variant="primary" onClick={()=>navigate(`/quiz/${id}`)}>
                   Start
                 </Button>
               </Modal.Footer>
@@ -92,7 +94,12 @@ export default function QuizCard({ isadmin,name,tag,id,user}) {
             src="https://img.icons8.com/material-outlined/48/000000/circled-right.png"
           />
           :
-          <></>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'space-between',width:'40%'}}>
+          <div style={{fontSize:'40px',fontFamily:'fantasy'}}>
+          {score}/{q.length}
+          </div>
+          <img src="https://img.icons8.com/parakeet/48/000000/experimental-checked-parakeet.png"/>
+          </div>
           }
           </>
         )}

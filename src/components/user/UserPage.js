@@ -26,7 +26,7 @@ export default function UserPage({ auth1, admin,user }) {
     const getQuizz = async () => {
       const data = await getDocs(quizCollectionRef);
       setQuizList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      console.log(quizLists);
+      // console.log(quizLists);
     };
     getQuizz();
    
@@ -45,7 +45,7 @@ export default function UserPage({ auth1, admin,user }) {
         >
           {quizLists.map((quiz)=>
           
-          <QuizCard name={quiz.name} tag={quiz.tag} id={quiz.id} user={quiz.users[user]}  ></QuizCard>)}
+          <QuizCard name={quiz.name} tag={quiz.tag} id={quiz.id} user={quiz.users[user]} score={quiz.users[user].score} q={quiz.questions}  ></QuizCard>)}
           
         </div>
       ) : (

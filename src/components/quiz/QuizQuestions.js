@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./QuizQuestions.css";
 import { auth, db } from "../../firebase-config";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   getDocs,
   getDoc,
@@ -13,16 +15,16 @@ import {
 } from "firebase/firestore";
 import { Bars } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
-import { async } from "@firebase/util";
 
-var answers = [];
-export default function QuizQuestions({ admin,user }) {
+let count = 0;
+let answer = [];
+export default function QuizQuestions({ admin, user }) {
   const { id } = useParams();
   const [ques, setQues] = useState([]);
   const [selected, isSelected] = useState(-1);
-  const [count, setCount] = useState(0);
-  const [seconds, setSeconds] = useState(59);
-  const [minutes, setMinutes] = useState(9);
+  // const [count, setCount] = useState(0);
+  const [seconds, setSeconds] = useState(19);
+  const [minutes, setMinutes] = useState(0);
   const [submit, setSubmit] = useState(false);
   const [quiz, setQuiz] = useState({});
   let navigate = useNavigate();
@@ -37,6 +39,7 @@ export default function QuizQuestions({ admin,user }) {
       const docSnap = await getDoc(docRef);
 
       setQues(docSnap.data().questions);
+      // console.log(ques)
       setQuiz(docSnap.data());
     };
     getSingleQuizz();
@@ -49,6 +52,8 @@ export default function QuizQuestions({ admin,user }) {
         if (minutes != 0) {
           setMinutes(minutes - 1);
           setSeconds(59);
+        }else{
+          onSubmit()
         }
       }
     }, 1000);
@@ -56,21 +61,33 @@ export default function QuizQuestions({ admin,user }) {
   });
 
   const onSubmit = async () => {
-    answers.push(selected);
+    if(selected==-1){
+      toast.error('please select an option')
+      return
+    }
+    answer.push(selected);
     // console.log(answers)
     // await addDoc(userCollectionRef, {
     //   id,
     //   answers,
     // });
+    let score = 0;
+    for (let i = 0; i < answer.length; i++) {
+      if (answer[i] === Number(ques[i]["correct"])) {
+        score += 1;
+        //  console.log(score)
+      }
+    }
+    if (selected == -1) {
+      toast.error("select one option!");
+      return;
+    }
     const newstate = {
       ...quiz,
-      users: {
-        ...quiz.users,
-        user: {
-          completed: true,
-          score: 2,
-        },
-      },
+    };
+    newstate.users[user] = {
+      completed: true,
+      score: score,
     };
     setDoc(docRef, newstate)
       .then((docRef) => {
@@ -79,12 +96,13 @@ export default function QuizQuestions({ admin,user }) {
       .catch((error) => {
         console.log(error);
       });
-    answers = [];
+    answer = [];
     navigate("/");
   };
 
   return (
     <>
+      <ToastContainer position="top-center" />
       {ques.length !== 0 ? (
         <div
           className="container-fluid"
@@ -209,15 +227,19 @@ export default function QuizQuestions({ admin,user }) {
                 <img
                   className="next"
                   onClick={() => {
-                    answers.push(selected);
-                    console.log(answers);
+                    if (selected == -1) {
+                      toast.error("select one option!");
+                      return;
+                    }
+                    answer.push(selected);
                     isSelected(-1);
                     if (count + 1 == ques.length) {
                       // setSubmit(true)
-                    } else if (count + 2 == ques.length) {
-                      setSubmit(true);
                     } else {
-                      setCount(count + 1);
+                      if (count + 2 == ques.length) {
+                        setSubmit(true);
+                      }
+                      ++count;
                     }
                   }}
                   src="https://img.icons8.com/cotton/40/000000/circled-chevron-right--v2.png"

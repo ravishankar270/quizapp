@@ -1,7 +1,7 @@
 import React from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Nav({user,auth1, setAuth,admin,setAdmin }) {
   let navigate = useNavigate();
@@ -19,9 +19,9 @@ export default function Nav({user,auth1, setAuth,admin,setAdmin }) {
     <>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <Link class="navbar-brand" to="/">
             Quizzer
-          </a>
+          </Link>
           <button
             class="navbar-toggler"
             type="button"
@@ -36,9 +36,7 @@ export default function Nav({user,auth1, setAuth,admin,setAdmin }) {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
+                
               </li>
 
             </ul>
