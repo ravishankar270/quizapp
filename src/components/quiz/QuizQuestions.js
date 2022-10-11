@@ -15,6 +15,7 @@ import {
 } from "firebase/firestore";
 import { Bars } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
+import { grey } from "@mui/material/colors";
 
 let count = 0;
 let answer = [];
@@ -23,8 +24,8 @@ export default function QuizQuestions({ admin, user }) {
   const [ques, setQues] = useState([]);
   const [selected, isSelected] = useState(-1);
   // const [count, setCount] = useState(0);
-  const [seconds, setSeconds] = useState(19);
-  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(59);
+  const [minutes, setMinutes] = useState(9);
   const [submit, setSubmit] = useState(false);
   const [quiz, setQuiz] = useState({});
   let navigate = useNavigate();
@@ -126,14 +127,14 @@ export default function QuizQuestions({ admin, user }) {
                     border:
                       selected === 1
                         ? "2px solid green"
-                        : "2px solid rgb(25, 81, 235)",
+                        : "2px solid grey",
                   }}
                   onClick={() => isSelected(1)}
                 >
                   <div
                     style={{
                       backgroundColor:
-                        selected !== 1 ? "rgb(25, 81, 235)" : "green",
+                        selected !== 1 ? "grey" : "green",
                     }}
                     className="no"
                   >
@@ -147,14 +148,14 @@ export default function QuizQuestions({ admin, user }) {
                     border:
                       selected === 2
                         ? "2px solid green"
-                        : "2px solid rgb(25, 81, 235)",
+                        : "2px solid grey",
                   }}
                   onClick={() => isSelected(2)}
                 >
                   <div
                     style={{
                       backgroundColor:
-                        selected !== 2 ? "rgb(25, 81, 235)" : "green",
+                        selected !== 2 ? "grey" : "green",
                     }}
                     className="no"
                   >
@@ -170,14 +171,14 @@ export default function QuizQuestions({ admin, user }) {
                     border:
                       selected === 3
                         ? "2px solid green"
-                        : "2px solid rgb(25, 81, 235)",
+                        : "2px solid grey",
                   }}
                   onClick={() => isSelected(3)}
                 >
                   <div
                     style={{
                       backgroundColor:
-                        selected !== 3 ? "rgb(25, 81, 235)" : "green",
+                        selected !== 3 ? "grey" : "green",
                     }}
                     className="no"
                   >
@@ -191,14 +192,14 @@ export default function QuizQuestions({ admin, user }) {
                     border:
                       selected === 4
                         ? "2px solid green"
-                        : "2px solid rgb(25, 81, 235)",
+                        : "2px solid grey",
                   }}
                   onClick={() => isSelected(4)}
                 >
                   <div
                     style={{
                       backgroundColor:
-                        selected !== 4 ? "rgb(25, 81, 235)" : "green",
+                        selected !== 4 ? "grey" : "green",
                     }}
                     className="no"
                   >
@@ -217,7 +218,8 @@ export default function QuizQuestions({ admin, user }) {
             >
               <h1
                 style={{
-                  marginLeft: "20px",
+                  marginLeft: "25px",
+                  color:"grey"
                 }}
               >
                 {minutes < 10 ? "0" + minutes : minutes}:

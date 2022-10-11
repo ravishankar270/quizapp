@@ -98,7 +98,7 @@ export default function QuizCard({ isadmin,name,tag,id,user,score,q}) {
           <div style={{fontSize:'40px',fontFamily:'fantasy'}}>
           {score}/{q.length}
           </div>
-          <img src="https://img.icons8.com/parakeet/48/000000/experimental-checked-parakeet.png"/>
+          <img style={{marginRight:'10px'}} src="https://img.icons8.com/material-two-tone/48/000000/checked--v1.png"/>
           </div>
           }
           </>

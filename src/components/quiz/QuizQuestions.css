@@ -4,7 +4,8 @@
     flex-direction: column;
 }
 .card-header{
-    background-color:rgb(25, 81, 235) ;
+    /* background-color:rgb(25, 81, 235) ; */
+    background-color: black;
     text-align: center;
     color: white;
 }
@@ -36,7 +37,8 @@
 
 }
 .no{
-    background-color:rgb(25, 81, 235) ;
+    /* background-color:rgb(25, 81, 235) ; */
+    /* background-color: black; */
     width: 20%;
     padding: 10px;
     color: white;
