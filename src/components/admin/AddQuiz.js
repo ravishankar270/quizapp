@@ -4,26 +4,30 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AddQuiz({ admin }) {
-  const [name,setName]=useState('')
-  const [no,setNo]=useState('')
-  const [tag,setTag]=useState('')
-  const [time,setTime]=useState('')
+  const [name, setName] = useState("");
+  const [no, setNo] = useState("");
+  const [tag, setTag] = useState("");
+  const [time, setTime] = useState(0);
   let navigate = useNavigate();
   useEffect(() => {
     if (!admin) {
       navigate("/login");
     }
-  },[]);
-  const addQuiz=()=>{
-    if (!name || !no || !tag || !time){
-        toast.error("fields are missing!");
-        return;
-      }
-      navigate(`/${name}/${no}/${tag}`)
-  }
+  }, []);
+  const addQuiz = () => {
+    if (!name || !no || !tag || !time) {
+      toast.error("fields are missing!");
+      return;
+    }
+    if(time>60 || time<=0){
+      toast.error('time limit is wrong')
+      return
+    }
+    navigate(`/${name}/${no}/${tag}`);
+  };
   return (
     <div className="container">
-    <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" />
       <div className="row">
         <div className="col-sm-7 mx-auto">
           {/* <form class="login"> */}
@@ -34,7 +38,7 @@ export default function AddQuiz({ admin }) {
             </label>
             <input
               required
-              onChange={(event)=>setName(event.target.value)}
+              onChange={(event) => setName(event.target.value)}
               type="text"
               name="name"
               class="form-control"
@@ -48,7 +52,7 @@ export default function AddQuiz({ admin }) {
             </label>
             <input
               required
-              onChange={(event)=>setNo(event.target.value)}
+              onChange={(event) => setNo(event.target.value)}
               name="number"
               type="number"
               class="form-control"
@@ -61,7 +65,7 @@ export default function AddQuiz({ admin }) {
             </label>
             <input
               required
-              onChange={(event)=>setTag(event.target.value)}
+              onChange={(event) => setTag(event.target.value)}
               name="tag"
               type="text"
               class="form-control"
@@ -72,18 +76,29 @@ export default function AddQuiz({ admin }) {
             <label for="exampleInputPassword1" class="form-label">
               Time limit
             </label>
+            <div style={{display:'flex'}}>
             <input
               required
-              onChange={(event)=>setTime(event.target.value)}
+              onChange={(event) => setTime(event.target.value)}
               name="time"
-              type="time"
+              type="number"
               class="form-control"
-              id="exampleInputPassword1"
+              id="time"
+              style={{
+                width:'80%'
+              }}
             />
+            <select style={{
+                width:'20%'
+              }} class="form-select" aria-label="Default select example">
+              <option selected>Min</option>
+            </select>
+            </div>
           </div>
-          
 
-          <button class="btn btn-primary" onClick={addQuiz}>Add Questions</button>
+          <button class="btn btn-primary" onClick={addQuiz}>
+            Add Questions
+          </button>
 
           {/* </form> */}
         </div>

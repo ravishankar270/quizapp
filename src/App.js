@@ -27,7 +27,7 @@ function App() {
         setAdmin={setAdmin}
       ></Nav>
       <Routes>
-        <Route path="/" element={<UserPage auth1={isAuth} admin={admin} />} />
+        <Route path="/" element={<UserPage auth1={isAuth} admin={admin} user={user} />} />
         <Route
           path="/login"
           element={
@@ -51,7 +51,7 @@ function App() {
           path="/admin"
           element={<AdminPage auth1={isAuth} admin={admin} />}
         />
-        <Route path="/quiz/:id" element={<QuizQuestions admin={admin} />} />
+        <Route path="/quiz/:id" element={<QuizQuestions admin={admin} user={user} />} />
         <Route path="/quiz-add" element={<AddQuiz admin={admin}/>} />
         <Route path="/:name/:questions/:tag" element={<QuizTemplate/>} />
         <Route path="*" element={<PageNotFound />} />
