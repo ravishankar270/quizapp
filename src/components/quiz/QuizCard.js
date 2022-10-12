@@ -10,7 +10,17 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 
-export default function QuizCard({ isadmin,name,tag,id,user,score,q}) {
+import {db} from "../../firebase-config"
+import {
+  getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  query,
+  where,
+} from "firebase/firestore";
+
+export default function QuizCard({ isadmin,name,tag,id,user,score,q,getql}) {
   let navigate = useNavigate();
   const theme = useTheme();
   const [show, setShow] = useState(false);
@@ -20,6 +30,13 @@ export default function QuizCard({ isadmin,name,tag,id,user,score,q}) {
   const handleClose1 = () => setShow1(false);
   const handleShow = () => setShow(true);
   const handleShow1 = () => setShow1(true);
+
+  const deletePost = async (id) => {
+    const postDoc = doc(db, "quizz", id);
+    console.log("delete")
+    await deleteDoc(postDoc);
+    getql();
+  };
   
   return (
     <Card className="card" sx={{ display: "flex", alignItems: "center" }}>
@@ -83,7 +100,10 @@ export default function QuizCard({ isadmin,name,tag,id,user,score,q}) {
           
           }}>
             <button className="btn btn-secondary">Update</button>
-            <button className="btn btn-danger">Delete</button>
+            <button className="btn btn-danger"
+            onClick={() => {
+              deletePost(id)
+            }}>Delete</button>
           </div>
         ) : (
           <>
