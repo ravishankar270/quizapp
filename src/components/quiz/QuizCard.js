@@ -149,7 +149,8 @@ export default function QuizCard({ isadmin, name, tag, id, user, score, q, getql
           </div>
         ) : (
           <>
-            {!user.completed ?
+        
+            {user && !user.completed ?
               <img
                 onClick={() => setShow1(true)}
                 className="arrow"

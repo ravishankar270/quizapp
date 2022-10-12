@@ -3,106 +3,111 @@ import { useParams } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
+import Checkbox from "@mui/material/Checkbox";
+import AdminQuestion from "./AdminQuestion";
 
+import { useNavigate } from "react-router-dom";
+import QuizCard from "../quiz/QuizCard";
+import { auth, db } from "../../firebase-config";
+import {
+  addDoc,
+  getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  query,
+  where,
+} from "firebase/firestore";
+import { Bars  } from "react-loader-spinner";
+import { async } from "@firebase/util";
+
+const ques=[]
+const count=0
 export default function QuizTemplate() {
-  const { name, questions, tag } = useParams();
-  const [question,setQuestions]=useState([])
-  const [dummy,setDummy]=useState([])
-  const [options, setOptions] = useState(false);
-  useEffect(()=>{
-   console.log(typeof(questions))
+  let navigate = useNavigate();
+  const { name, tag } = useParams();
+  const [question, setQuestion] = useState("");
+  const [correct, setCorrect] = useState(-1);
+  const [op1, setOp1] = useState("");
+  const [op2, setOp2] = useState("");
+  const [op3, setOp3] = useState("");
+  const [op4, setOp4] = useState("");
+  
+  const [sub,setSub] = useState(false);
 
-  },[])
+
+  useEffect(() => {
+    console.log(typeof questions);
+  }, []);
+
+//   const createPost = async ({ isAuth }) => {
+//     await addDoc(postsCollectionRef, {title,body,author:{name:auth.currentUser.displayName ,id:auth.currentUser.uid}})
+//     navigate("/")
+// }
+
+const postsCollectionRef = collection(db,"quizz")
+  const submitQuiz = async() => {
+    console.log("last push")
+    await addDoc(postsCollectionRef, {
+      name,
+      tag,
+      questions:ques
+    })
+    navigate("/admin")
+  }
+
   return (
     <>
-      <div className="container-fluid" style={{
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
-        flexDirection:'column'
-      }}>
-    {[...Array(Number(questions))].map((e, i) => {
-     return(
-      <div style={{
-        display:'flex',
-        justifyContent:'space-around',
-        boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-        margin:'10px',
-        padding:'10px'
-      
-      }}>  
-        <div style={{
-          fontFamily:'fantasy',
-          fontSize:'35px',
-          margin:'10px'
-        }}>
-          {i+1}
-        </div>
-    <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '50ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-
-      <TextField id="outlined-basic" label="Question" variant="outlined" styles={{
-        width:"200px"
-      }} /><br/>
-      <FormControl>
-      <FormLabel id="demo-radio-buttons-group-label">Options</FormLabel>
-      <RadioGroup
-        aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue="op1"
-        name="radio-buttons-group"
+      <div
+        className="container-fluid"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
       >
-      
-      <div style={{
-        display:"flex",
-        alignItems:"center"
-      }}><FormControlLabel value="op1" control={<Radio />} label="A" /><TextField  label="Option 1" variant="standard" /><br/>
+        <AdminQuestion question={question} op1={op1} op2={op2} op3={op3} op4={op4} setQuestion={setQuestion} setOp1={setOp1} setOp2={setOp2} setOp3={setOp3} setOp4={setOp4} setCorrect={setCorrect}></AdminQuestion>
+        <button
+          className="btn btn-primary"
+          onClick={()=>{
+            
+            console.log('hello')
+            ques.push({
+              q:question,
+              1:op1,
+              2:op2,
+              3:op3,
+              4:op4,
+              correct
+            })
+            setQuestion("")
+            setOp1("")
+            setOp2("")
+            setOp3("")
+            setOp4("")
+            console.log(ques)
+            if(ques.length==2){
+              setSub(true)
+            }
+            if(ques.length==3){
+              submitQuiz()
+            }
+          }
+          }
+          >
+          {sub? "submit" : "Next"}
+        </button>
       </div>
-
-      <div style={{
-        display:"flex",
-        alignItems:"center"
-      }}>
-        <FormControlLabel value="op2" control={<Radio />} label="B" /><TextField id="standard-basic" label="Option 2" variant="standard" /><br/>
-      </div>
-      
-      <div style={{
-        display:"flex",
-        alignItems:"center"
-      }}>
-        <FormControlLabel value="op3" control={<Radio />} label="C" /><TextField id="standard-basic" label="Option 3" variant="standard" /><br/>
-      </div>
-
-      <div style={{
-        display:"flex",
-        alignItems:"center"
-      }}>
-        <FormControlLabel value="op4" control={<Radio />} label="D" /><TextField id="standard-basic" label="Option 4" variant="standard" /><br/>
-      </div>
-
-      </RadioGroup>
-      </FormControl>
-    </Box>
-    </div>
-     )
-
-       
-})}
-</div>
     </>
   );
 }

@@ -77,7 +77,6 @@ export default function QuizQuestions({ admin, user }) {
     for (let i = 0; i < answer.length; i++) {
       if (answer[i] === Number(ques[i]["correct"])) {
         score += 1;
-        //  console.log(score)
       }
     }
     if (selected == -1) {
@@ -87,10 +86,19 @@ export default function QuizQuestions({ admin, user }) {
     const newstate = {
       ...quiz,
     };
+    if(!newstate.users){
+      newstate.users={
+        user: {
+          completed: true,
+          score: score,
+        }
+      }
+    }else{
     newstate.users[user] = {
       completed: true,
       score: score,
     };
+  }
     setDoc(docRef, newstate)
       .then((docRef) => {
         console.log("Entire Document has been updated successfully");

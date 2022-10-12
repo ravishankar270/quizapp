@@ -45,7 +45,7 @@ export default function UserPage({ auth1, admin,user }) {
         >
           {quizLists.map((quiz)=>
           
-          <QuizCard name={quiz.name} tag={quiz.tag} id={quiz.id} user={quiz.users[user]?quiz.users[user]:{}} score={quiz.users[user]?quiz.users[user].score:0} q={quiz.questions}  ></QuizCard>)}
+          <QuizCard name={quiz.name} tag={quiz.tag} id={quiz.id} user={quiz.users?quiz.users[user]:true} score={quiz.users?(quiz.users[user]?quiz.users[user].score:0):0} q={quiz.questions}  ></QuizCard>)}
           
         </div>
       ) : (

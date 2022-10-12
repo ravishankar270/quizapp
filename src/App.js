@@ -53,7 +53,7 @@ function App() {
         />
         <Route path="/quiz/:id" element={<QuizQuestions admin={admin} user={user} />} />
         <Route path="/quiz-add" element={<AddQuiz admin={admin}/>} />
-        <Route path="/:name/:questions/:tag" element={<QuizTemplate/>} />
+        <Route path="/:name/:tag" element={<QuizTemplate/>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </Router>

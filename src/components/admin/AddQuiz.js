@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function AddQuiz({ admin }) {
   const [name, setName] = useState("");
-  const [no, setNo] = useState("");
+  // const [no, setNo] = useState("");
   const [tag, setTag] = useState("");
   const [time, setTime] = useState(0);
   let navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function AddQuiz({ admin }) {
     }
   }, []);
   const addQuiz = () => {
-    if (!name || !no || !tag || !time) {
+    if (!name || !tag || !time) {
       toast.error("fields are missing!");
       return;
     }
@@ -23,7 +23,7 @@ export default function AddQuiz({ admin }) {
       toast.error('time limit is wrong')
       return
     }
-    navigate(`/${name}/${no}/${tag}`);
+    navigate(`/${name}/${tag}`);
   };
   return (
     <div className="container">
@@ -46,7 +46,7 @@ export default function AddQuiz({ admin }) {
               aria-describedby="emailHelp"
             />
           </div>
-          <div class="mb-3">
+          {/* <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">
               No of Questions
             </label>
@@ -58,7 +58,7 @@ export default function AddQuiz({ admin }) {
               class="form-control"
               id="exampleInputPassword1"
             />
-          </div>
+          </div> */}
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">
               Tag
