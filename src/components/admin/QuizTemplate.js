@@ -31,7 +31,22 @@ export default function QuizTemplate() {
         flexDirection:'column'
       }}>
     {[...Array(Number(questions))].map((e, i) => {
-     return( 
+     return(
+      <div style={{
+        display:'flex',
+        justifyContent:'space-around',
+        boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+        margin:'10px',
+        padding:'10px'
+      
+      }}>  
+        <div style={{
+          fontFamily:'fantasy',
+          fontSize:'35px',
+          margin:'10px'
+        }}>
+          {i+1}
+        </div>
     <Box
       component="form"
       sx={{
@@ -82,6 +97,7 @@ export default function QuizTemplate() {
       </RadioGroup>
       </FormControl>
     </Box>
+    </div>
      )
 
        
