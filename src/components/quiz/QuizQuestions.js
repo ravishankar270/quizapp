@@ -28,6 +28,7 @@ export default function QuizQuestions({ admin, user }) {
   const [minutes, setMinutes] = useState(9);
   const [submit, setSubmit] = useState(false);
   const [quiz, setQuiz] = useState({});
+  
   let navigate = useNavigate();
   const docRef = doc(db, "quizz", id);
 
@@ -126,7 +127,7 @@ export default function QuizQuestions({ admin, user }) {
                   style={{
                     border:
                       selected === 1
-                        ? "2px solid green"
+                        ? "2px solid blue"
                         : "2px solid grey",
                   }}
                   onClick={() => isSelected(1)}
@@ -134,7 +135,7 @@ export default function QuizQuestions({ admin, user }) {
                   <div
                     style={{
                       backgroundColor:
-                        selected !== 1 ? "grey" : "green",
+                        selected !== 1 ? "grey" : "blue",
                     }}
                     className="no"
                   >
@@ -147,7 +148,7 @@ export default function QuizQuestions({ admin, user }) {
                   style={{
                     border:
                       selected === 2
-                        ? "2px solid green"
+                        ? "2px solid blue"
                         : "2px solid grey",
                   }}
                   onClick={() => isSelected(2)}
@@ -155,7 +156,7 @@ export default function QuizQuestions({ admin, user }) {
                   <div
                     style={{
                       backgroundColor:
-                        selected !== 2 ? "grey" : "green",
+                        selected !== 2 ? "grey" : "blue",
                     }}
                     className="no"
                   >
@@ -170,7 +171,7 @@ export default function QuizQuestions({ admin, user }) {
                   style={{
                     border:
                       selected === 3
-                        ? "2px solid green"
+                        ? "2px solid blue"
                         : "2px solid grey",
                   }}
                   onClick={() => isSelected(3)}
@@ -178,7 +179,7 @@ export default function QuizQuestions({ admin, user }) {
                   <div
                     style={{
                       backgroundColor:
-                        selected !== 3 ? "grey" : "green",
+                        selected !== 3 ? "grey" : "blue",
                     }}
                     className="no"
                   >
@@ -191,7 +192,7 @@ export default function QuizQuestions({ admin, user }) {
                   style={{
                     border:
                       selected === 4
-                        ? "2px solid green"
+                        ? "2px solid blue"
                         : "2px solid grey",
                   }}
                   onClick={() => isSelected(4)}
@@ -199,7 +200,7 @@ export default function QuizQuestions({ admin, user }) {
                   <div
                     style={{
                       backgroundColor:
-                        selected !== 4 ? "grey" : "green",
+                        selected !== 4 ? "grey" : "blue",
                     }}
                     className="no"
                   >
@@ -219,7 +220,8 @@ export default function QuizQuestions({ admin, user }) {
               <h1
                 style={{
                   marginLeft: "25px",
-                  color:"grey"
+                  color:"grey",
+                  fontSize:'30px'
                 }}
               >
                 {minutes < 10 ? "0" + minutes : minutes}:
@@ -249,7 +251,7 @@ export default function QuizQuestions({ admin, user }) {
               ) : (
                 <button
                   style={{ marginRight: "20px" }}
-                  className="btn btn-primary"
+                  className="btn btn-secondary"
                   onClick={onSubmit}
                 >
                   Submit Quiz
