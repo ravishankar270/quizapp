@@ -88,16 +88,13 @@ export default function QuizQuestions({ admin, user }) {
     };
     if(!newstate.users){
       newstate.users={
-        user: {
-          completed: true,
-          score: score,
-        }
+       
       }
+      newstate.users[user] = {
+        completed: true,
+        score: score,
+      };
     }else{
-    newstate.users[user] = {
-      completed: true,
-      score: score,
-    };
   }
     setDoc(docRef, newstate)
       .then((docRef) => {

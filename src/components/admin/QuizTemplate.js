@@ -3,20 +3,9 @@ import { useParams } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-
-import Checkbox from "@mui/material/Checkbox";
 import AdminQuestion from "./AdminQuestion";
 
 import { useNavigate } from "react-router-dom";
-import QuizCard from "../quiz/QuizCard";
 import { auth, db } from "../../firebase-config";
 import {
   addDoc,
