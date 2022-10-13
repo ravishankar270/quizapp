@@ -39,6 +39,7 @@ export default function UserPage({ auth1, admin,user }) {
           className="container-fluid"
           style={{
             display: "flex",
+            flexDirection:'column',
             justifyContent: "center",
             alignItems: "center",
           }}
