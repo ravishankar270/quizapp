@@ -95,6 +95,10 @@ export default function QuizQuestions({ admin, user }) {
         score: score,
       };
     }else{
+      newstate.users[user] = {
+        completed: true,
+        score: score,
+      };
   }
     setDoc(docRef, newstate)
       .then((docRef) => {
