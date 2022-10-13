@@ -108,6 +108,7 @@ export default function QuizQuestions({ admin, user }) {
         console.log(error);
       });
     answer = [];
+    count=0
     navigate("/");
   };
 
